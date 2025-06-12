@@ -5,6 +5,10 @@ export default function handler(req, res) {
 
     const { data } = req.body;
 
+    if (data === null){
+        return res.status(400).json({error: '"data" must not be empty'})
+    }
+
     if (typeof data !== 'string') {
         return res.status(400).json({ error: '"data" must be a string' });
     }
