@@ -16,3 +16,4 @@ export default function handler(req, res) {
     const sortedArray = data.split('').sort();
     res.status(200).json({ word: sortedArray });
 }
+handler()
