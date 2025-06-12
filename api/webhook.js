@@ -1,10 +1,8 @@
-const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
+export default function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-app.use(express.json());
-
-app.post('/webhook', (req, res) => {
     const { data } = req.body;
 
     if (typeof data !== 'string') {
@@ -12,10 +10,5 @@ app.post('/webhook', (req, res) => {
     }
 
     const sortedArray = data.split('').sort();
-
-    res.json({ word: sortedArray });
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+    res.status(200).json({ word: sortedArray });
+}
